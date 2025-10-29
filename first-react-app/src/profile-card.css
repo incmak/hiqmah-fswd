@@ -1,0 +1,61 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.profile-card {
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 10px;
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 16px 7px;
+}
+.profile-image {
+  border-radius: 20px;
+  aspect-ratio: 1/1;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: all 0.3s ease-in-out;
+}
+.profile-image:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+.profile-content {
+  padding: 20px 10px;
+}
+
+.profile-actions {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-actions .social-stats {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 99px;
+  padding: 3px 6px;
+}
+.follow-btn {
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 6px 10px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  gap: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.follow-btn:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(0.95);
+}

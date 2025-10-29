@@ -1,0 +1,39 @@
+.flashcard-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+.flashcard {
+  cursor: pointer;
+  padding: 20px;
+  perspective: 1000px;
+}
+.flashcard-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  background: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flashcard.selected .flashcard-inner {
+  transform: rotateY(180deg);
+  /* transform: scale(1.05); */
+  transition: all 0.3s ease-in-out;
+  background-color: black;
+}
+
+.flashcard-back {
+  color: white;
+  transform: rotateY(180deg);
+}
