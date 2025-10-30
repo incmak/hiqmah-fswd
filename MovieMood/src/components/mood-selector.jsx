@@ -12,7 +12,7 @@ export default function MoodSelector({ moodS, setMood }) {
       {MOODS.map((mood) => (
         <button
           key={mood}
-          className={`${moodS === mood ? 'selected' : ''} mood-button`}
+          className={`mood-button ${moodS === mood ? 'selected' : ''}`}
           onClick={() => {
             setMood(mood);
           }}
