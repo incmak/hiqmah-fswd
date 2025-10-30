@@ -71,3 +71,28 @@ body {
   cursor: pointer;
   color: rgba(255, 200, 83, 0.747);
 }
+.moods-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-inline: 10px;
+  padding-bottom: 20px;
+}
+.mood-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 12px;
+}
+.mood-button:hover {
+  transform: scale(1.2);
+}
+.mood-button.selected {
+  transform: scale(1.2);
+}
+
+.movie-notes {
+  padding: 10px;
+  width: 100%;
+}
