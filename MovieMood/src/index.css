@@ -15,7 +15,8 @@ li {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   padding: 40px 20px;
@@ -130,8 +131,8 @@ body {
 .movie-plot {
   font-size: 0.85rem;
   line-height: 1.4;
-  max-height: 40px;
-  overflow-y: hidden;
+  /* max-height: 40px;
+  overflow-y: hidden; */
   color: #777;
 }
 
@@ -234,7 +235,7 @@ body {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.movie-card button {
+.movie-card .save-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
@@ -248,12 +249,17 @@ body {
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.movie-card button:hover {
+.movie-card .save-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
-
-.movie-card button:active {
+.link {
+  color: #5a67d8;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.movie-card .save-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
@@ -275,4 +281,17 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Skelton */
+.skelton {
+  background-color: #c3c0c0 !important;
+  background: #c3c0c0 !important;
+  height: 30px;
+  width: 100%;
 }

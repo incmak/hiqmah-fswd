@@ -1,39 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieList from './components/movie-list';
+// import { MoonLoader } from 'react-spinners';
+import MovieCardSkelton from './components/loaders/movie-card-skelton';
+import { Button } from './components/button';
+import MovieDashboard from './components/movie-dashboard';
 
-const movies = [
-  {
-    imdbId: 1,
-    title: 'The Shawshank Redemption',
-    // rating: 4,
-    poster:
-      'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
-    plot: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-  },
-  {
-    imdbId: 2,
-    title: 'The Godfather',
-    // rating: 3,
-    poster:
-      'https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg',
-    plot: "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.",
-  },
-  {
-    imdbId: 3,
-    title: 'Inception',
-    // rating: 3,
-    poster:
-      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
-    plot: 'A thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.',
-  },
-];
+const baseURL = 'https://api.imdbapi.dev';
+
 function App() {
   const [movieSearch, setMovieSearch] = useState('');
   const [myMovies, setMyMovies] = useState([]);
+  // Fetch movies and store in state
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const filteredMovies = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(movieSearch.toLowerCase())
-  );
+  async function getMovieData() {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${baseURL}/titles`);
+      const data = await res.json();
+      setMovies(data?.titles);
+      // console.log(data.titles);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  useEffect(() => {
+    getMovieData();
+  }, []);
 
   return (
     <div className='movies'>
@@ -47,8 +44,20 @@ function App() {
           onChange={(e) => setMovieSearch(e.target.value)}
         />
       </div>
+      <h1>Movie dashboard</h1>
+      <MovieDashboard movies={movies} />
       <h1>Movies List</h1>
-      <MovieList movies={filteredMovies} setMyMovies={setMyMovies} />
+      {isLoading ? (
+        <div className='movie-list'>
+          {Array.from({ length: 10 }, (_, index) => (
+            <MovieCardSkelton key={index} />
+          ))}
+        </div>
+      ) : error ? (
+        <p style={{ color: 'red', textAlign: 'c' }}>{error.message}</p>
+      ) : (
+        <MovieList moviesData={movies} setMyMovies={setMyMovies} />
+      )}
       <h1>My Watchlist</h1>
       <MovieList movies={myMovies} setMyMovies={setMyMovies} />
     </div>

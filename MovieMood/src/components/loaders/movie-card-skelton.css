@@ -1,0 +1,14 @@
+.image.skelton {
+  height: 200px;
+  width: 100%;
+}
+.movie-title.skelton {
+  height: 10px;
+}
+.movie-plot.skelton {
+  height: 30px;
+}
+button.skelton {
+  width: 150px;
+  margin-inline: auto;
+}

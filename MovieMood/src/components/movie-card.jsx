@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Star from './star';
 import MoodSelector from './mood-selector';
 import NotesBox from './notes-box';
+import ReadMore from './read-more';
 
 export default function MovieCard({ movie, setMyMovies }) {
   const [rating, setRating] = useState(movie.rating || 0);
   const [mood, setMood] = useState(movie.mood || '');
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState(movie.notes || '');
+  // const [readMore, setReadMore] = useState(false);
+
+  useEffect(() => {
+    setRating(movie.rating || 0);
+    setMood(movie.mood || '');
+    setNotes(movie.notes || '');
+  }, [movie.rating, movie.mood, movie.notes]);
 
   function handleSave() {
     const ratedMovie = { ...movie, rating, mood, notes };
     setMyMovies((prevMovies) => {
       // what does find return (condition fullfills ::: returns first element, condition doesn't fullfill :: undefined)
       const exists = prevMovies.find((m) => m.imdbId === ratedMovie.imdbId);
-      console.log('🚀 ~ handleSave ~ exists:', exists);
       if (exists) {
         return prevMovies.map((m) =>
           m.imdbId === ratedMovie.imdbId ? ratedMovie : m
@@ -22,27 +29,46 @@ export default function MovieCard({ movie, setMyMovies }) {
       return [...prevMovies, ratedMovie];
     });
   }
-  const handleRating = (index) => {
-    setRating(index);
-    // handleSave();
-  };
+  // const handleRating = (index) => {
+  //   setRating(index);
+  //   // handleSave();
+  // };
 
   // rating ::: state
   // movie.rating :: data
+
+  const dataRating = Math.ceil(movie.rating?.aggregateRating / 2) || 0;
+
+  // console.log('movies', movie.plot.length);
   return (
     <div className='movie-card'>
-      <img src={movie.poster} alt={movie.title} />
+      <img src={movie.primaryImage.url} alt={movie?.primaryTitle} />
       <div className='movie-details'>
-        <h2 className='movie-title'>{movie.title}</h2>
-        <p>Rating: {movie.rating}</p>
-        <p className='movie-plot'>Plot: {movie.plot}</p>
+        <h2 className='movie-title'>{movie?.primaryTitle}</h2>
+        {/* <p>Rating: {JSON.stringify(movie.rating)}</p> */}
+        <p className='movie-plot'>
+          Plot:
+          {/* {readMore ? movie.plot : movie.plot.slice(0, 40)}
+          {movie.plot.length > 40 && (
+            <>
+              ...
+              <button
+                className='read-more link'
+                onClick={() => setReadMore((prev) => !prev)}
+              >
+                {readMore ? 'Read Less' : 'Read More'}
+              </button>
+            </>
+          )} */}
+          <ReadMore content={movie.plot} defaultSize={40} />
+        </p>
       </div>
       <div className='movie-ratings'>
         {Array.from({ length: 5 }, (_, index) => (
           <Star
             key={index}
-            color={index < rating ? 'orange' : '#000'}
-            onClick={() => handleRating(index + 1)}
+            color={index < dataRating ? 'orange' : '#000'}
+            // onClick={() => handleRating(index + 1)}
           />
         ))}
       </div>
@@ -52,7 +78,9 @@ export default function MovieCard({ movie, setMyMovies }) {
       {mood !== '' && (
         <NotesBox notes={notes || movie.notes} setNotes={setNotes} />
       )}
-      <button onClick={handleSave}>Save</button>
+      <button className='save-btn' onClick={handleSave}>
+        Save
+      </button>
     </div>
   );
 }
