@@ -1,18 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-}
-
-li {
-  list-style: none;
-}
+/* Sizes in tailwind */
+/* 
+- multiples of 2 :: upto 16 --> pb-0.5: 2px, pb-1: 4px, pb-1.5: 6px, pb-2: 8px, pb-2.5: 10px, pb-3: 12px, pb-3.5: 14px, pb-4: 16px
+- multiples of 4:: above 16 but upto 120 --> pb-4: 16px, pb-5: 20px, pb-6: 24px, pb-7: 28px, pb-8: 32px, pb-9: 36px, pb-10: 40px
+- multiples of 8 pb-32, pb-36, pb-37,pb-38,pb-39 pb-40 pb-96
+*/
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -28,22 +22,7 @@ body {
   margin: 0 auto;
 }
 
-.movies h1 {
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 2rem 0 1.5rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  letter-spacing: -0.5px;
-}
-
-.movie-input-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.movie-input {
+/* .movie-input {
   background: rgba(255, 255, 255, 0.95);
   border: 2px solid transparent;
   border-radius: 50px;
@@ -53,7 +32,7 @@ body {
   font-family: 'Inter', sans-serif;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .movie-input:focus {
   outline: none;

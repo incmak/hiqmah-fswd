@@ -4,8 +4,9 @@ import MovieList from './components/movie-list';
 import MovieCardSkelton from './components/loaders/movie-card-skelton';
 import { Button } from './components/button';
 import MovieDashboard from './components/movie-dashboard';
+import Heading from './components/heading';
 
-const baseURL = 'https://api.imdbapi.dev';
+const baseURL = 'https://api.imdbapdi.dev';
 
 function App() {
   const [movieSearch, setMovieSearch] = useState('');
@@ -34,19 +35,21 @@ function App() {
 
   return (
     <div className='movies'>
-      <div className='movie-input-container'>
+      {/* Arbitrary values */}
+      <div className='flex padding-bottom-4px justify-center mb-8'>
         <input
           type='text'
           id='search-movies'
-          className='movie-input'
+          // className='movie-input '
+          className='bg-white/95 rounded-full p-4 w-[400px] text-base transition duration-300 ease-in shadow-md'
           placeholder='Search movies...'
           value={movieSearch}
           onChange={(e) => setMovieSearch(e.target.value)}
         />
       </div>
-      <h1>Movie dashboard</h1>
+      <Heading>Movie dashboard</Heading>
       <MovieDashboard movies={movies} />
-      <h1>Movies List</h1>
+      <Heading>Movies List</Heading>
       {isLoading ? (
         <div className='movie-list'>
           {Array.from({ length: 10 }, (_, index) => (
@@ -54,11 +57,11 @@ function App() {
           ))}
         </div>
       ) : error ? (
-        <p style={{ color: 'red', textAlign: 'c' }}>{error.message}</p>
+        <p className='text-red-500'>{error.message}</p>
       ) : (
         <MovieList moviesData={movies} setMyMovies={setMyMovies} />
       )}
-      <h1>My Watchlist</h1>
+      <Heading>My Watchlist</Heading>
       <MovieList movies={myMovies} setMyMovies={setMyMovies} />
     </div>
   );
