@@ -4,7 +4,12 @@ import MoodSelector from './mood-selector';
 import NotesBox from './notes-box';
 import ReadMore from './read-more';
 
-export default function MovieCard({ movie, setMyMovies }) {
+export default function MovieCard({
+  movie,
+  setMyMovies,
+  setFavoriteMovie,
+  favoriteMovie,
+}) {
   const [rating, setRating] = useState(movie.rating || 0);
   const [mood, setMood] = useState(movie.mood || '');
   const [notes, setNotes] = useState(movie.notes || '');
@@ -39,10 +44,18 @@ export default function MovieCard({ movie, setMyMovies }) {
 
   const dataRating = Math.ceil(movie.rating?.aggregateRating / 2) || 0;
 
+  function handleSaveLocal() {
+    setFavoriteMovie(movie);
+    // localStorage.setItem('myMovies', JSON.stringify(movie));
+  }
+  useEffect(() => {
+    if (favoriteMovie)
+      localStorage.setItem('myMovies', JSON.stringify(favoriteMovie));
+  }, [favoriteMovie]);
   // console.log('movies', movie.plot.length);
   return (
-    <div className='movie-card'>
-      <img src={movie.primaryImage.url} alt={movie?.primaryTitle} />
+    <div className='movie-card' onClick={handleSaveLocal}>
+      <img src={movie?.primaryImage?.url} alt={movie?.primaryTitle} />
       <div className='movie-details'>
         <h2 className='movie-title'>{movie?.primaryTitle}</h2>
         {/* <p>Rating: {JSON.stringify(movie.rating)}</p> */}

@@ -5,8 +5,8 @@ export default function ReadMore({ content, defaultSize }) {
 
   return (
     <>
-      {readMore ? content : content.slice(0, defaultSize)}
-      {content.length > defaultSize && (
+      {readMore ? content : content?.slice(0, defaultSize)}
+      {content?.length > defaultSize && (
         <>
           ...
           <button
